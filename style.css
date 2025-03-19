@@ -42,3 +42,50 @@ a:hover {
 .column i:hover {
     color: rgb(241, 34, 69); /* Change text color on hover */
 }
+
+.text-bold {
+    font-weight: bold;
+}
+.text-italic {
+    font-style: italic;
+}
+
+.rotate-text {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Table color */
+.tabfirst { background-color: #78c3789c; }  /* Green!25 */
+.tabsecond { background-color: #efdf77a1; } /* RGB (1, 0.96, 0.7) */
+.tabthird { background-color: #fcc290c9; }  /* RGB (1, 0.85, 0.7) */
+table {
+    border-collapse: collapse;
+    width: 100%;
+
+}
+th, td {
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+}
+th {
+    background-color: #ddd;
+}
+
+table.no-border td, table.no-border th {
+    border: none;
+}
+
+.comparison-table img {
+    width: 250px; /* Set a fixed width */
+    /* height: 150px; */
+    object-fit: cover; /* Ensures images maintain aspect ratio and fit within the set dimensions */
+}
+
+.color-red {
+    color: rgb(197, 24, 24);
+}

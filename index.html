@@ -68,6 +68,7 @@
     <p class="title is-3 mt-5 has-text-centered">Architecture overview</p>
     <figure class="image">
       <img src="images/overview.png">
+      <figcaption class="text-italic">Our approach takes RGB-D inputs to perform accurate 3D scene reconstruction. Initially, precise matches between consecutive frames are detected, which enables tracking of the camera pose through a rigid transformation. This pose is further refined using gradient-based optimization, leveraging Gaussian alignment to ensure accurate registration of new frames with the existing 3D model. The mapping process updates and transforms existing Gaussian splats in the 3D scene, producing high-quality reconstructions with efficient alignment and optimization steps.</figcaption>
     </figure>
 
     <p class="is-3 mt-5 has-text-center"><a href="#"><b>RELICA</b></a></p>
@@ -162,6 +163,450 @@
     </div>
   </div>
   </section>
+
+  <section class="section">
+    <div class="container is-max-desktop has-text-centered">
+      <p class="title is-3 mt-5 has-text-centered"> Visual comparison</p>
+      <table class="no-border comparison-table">
+        <caption><b>Rendering comparison on TUM <span class="color-red">fr1/desk</span> </b></caption>
+        <thead>
+            <tr>
+                <th>SplaTAM</th>
+                <th>MonoGS</th>
+                <th>Ours</th>
+                <th>GT</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><img src="images/rendering/220_desk_splatam.png" alt="SplaTAM"></td>
+                <td><img src="images/rendering/220_desk_mono.png" alt="MonoGS"></td>
+                <td><img src="images/rendering/220_desk_flsl.png" alt="Ours"></td>
+                <td><img src="images/rendering/220_desk_gt.png" alt="GT"></td>
+            </tr>
+            <tr>
+                <td><img src="images/rendering/240_desk_splatam.png" alt="SplaTAM"></td>
+                <td><img src="images/rendering/240_desk_mono.png" alt="MonoGS"></td>
+                <td><img src="images/rendering/240_desk_flsl.png" alt="Ours"></td>
+                <td><img src="images/rendering/240_desk_gt.png" alt="GT"></td>
+            </tr>
+            <tr>
+                <td><img src="images/rendering/420_desk_splatam.png" alt="SplaTAM"></td>
+                <td><img src="images/rendering/420_desk_mono.png" alt="MonoGS"></td>
+                <td><img src="images/rendering/420_desk_flsl.png" alt="Ours"></td>
+                <td><img src="images/rendering/420_desk_gt.png" alt="GT"></td>
+            </tr>
+        </tbody>
+      </table>
+      <div class="line"></div>
+
+      <table class="comparison-table no-border">
+        <caption><b>Rendering comparison on TUM <span class="color-red">fr1/xyz</span> </b></caption>
+        <thead>
+            <tr>
+                <th>SplaTAM</th>
+                <th>MonoGS</th>
+                <th>Ours</th>
+                <th>GT</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><img src="images/rendering/160_xyz_splatam.png" alt="SplaTAM"></td>
+                <td><img src="images/rendering/160_xyz_mono.png" alt="MonoGS"></td>
+                <td><img src="images/rendering/160_xyz_flsl.png" alt="Ours"></td>
+                <td><img src="images/rendering/160_xyz_gt.png" alt="GT"></td>
+            </tr>
+            <tr>
+                <td><img src="images/rendering/400_xyz_splatam.png" alt="SplaTAM"></td>
+                <td><img src="images/rendering/400_xyz_mono.png" alt="MonoGS"></td>
+                <td><img src="images/rendering/400_xyz_flsl.png" alt="Ours"></td>
+                <td><img src="images/rendering/400_xyz_gt.png" alt="GT"></td>
+            </tr>
+            <tr>
+                <td><img src="images/rendering/520_xyz_splatam.png" alt="SplaTAM"></td>
+                <td><img src="images/rendering/520_xyz_mono.png" alt="MonoGS"></td>
+                <td><img src="images/rendering/520_xyz_flsl.png" alt="Ours"></td>
+                <td><img src="images/rendering/520_xyz_gt.png" alt="GT"></td>
+            </tr>
+        </tbody>
+      </table>
+      <div class="line"></div>
+
+      <table class="comparison-table no-border">
+        <caption><b>Rendering comparison on TUM <span class="color-red">fr1/office</span> </b></caption>
+        <thead>
+            <tr>
+                <th>SplaTAM</th>
+                <th>MonoGS</th>
+                <th>Ours</th>
+                <th>GT</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><img src="images/rendering/800_fr3off_splatam.png" alt="SplaTAM"></td>
+                <td><img src="images/rendering/800_fr3off_mono.png" alt="MonoGS"></td>
+                <td><img src="images/rendering/800_fr3off_flsl.png" alt="Ours"></td>
+                <td><img src="images/rendering/800_fr3off_gt.png" alt="GT"></td>
+            </tr>
+            <tr>
+                <td><img src="images/rendering/1440_fr3off_splatam.png" alt="SplaTAM"></td>
+                <td><img src="images/rendering/1440_fr3off_mono.png" alt="MonoGS"></td>
+                <td><img src="images/rendering/1440_fr3off_flsl.png" alt="Ours"></td>
+                <td><img src="images/rendering/1440_fr3off_gt.png" alt="GT"></td>
+            </tr>
+            <tr>
+                <td><img src="images/rendering/2000_fr3off_splatam.png" alt="SplaTAM"></td>
+                <td><img src="images/rendering/2000_fr3off_mono.png" alt="MonoGS"></td>
+                <td><img src="images/rendering/2000_fr3off_flsl.png" alt="Ours"></td>
+                <td><img src="images/rendering/2000_fr3off_gt.png" alt="GT"></td>
+            </tr>
+        </tbody>
+      </table>
+      <p class="title is-3 mt-5 has-text-centered"> Additional tracking results </p>
+      
+      <table>
+        <caption class="text-bold text-italic">Tracking performance on the ScanNet dataset, reported using the Absolute Trajectory Error (ATE) metric (cm).</caption>
+        <thead>
+            <tr>
+                <th>Methods</th>
+                <th>0000</th>
+                <th>0059</th>
+                <th>0106</th>
+                <th>0169</th>
+                <th>0181</th>
+                <th>0207</th>
+                <th>Avg.</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Vox-Fusion [1]</td>
+                <td>68.84</td>
+                <td>24.18</td>
+                <td class="tabthird">8.41</td>
+                <td>27.28</td>
+                <td>23.30</td>
+                <td>9.41</td>
+                <td>26.90</td>
+            </tr>
+            <tr>
+                <td>NICE-SLAM [2]</td>
+                <td class="tabthird">12.00</td>
+                <td>14.00</td>
+                <td class="tabfirst"><b>7.90</b></td>
+                <td class="tabfirst"><b>10.90</b></td>
+                <td class="tabthird">13.40</td>
+                <td class="tabfirst"><b>6.20</b></td>
+                <td class="tabsecond">10.73</td>
+            </tr>
+            <tr>
+                <td>Point-SLAM [3]</td>
+                <td class="tabsecond">10.24</td>
+                <td class="tabsecond">7.81</td>
+                <td>8.65</td>
+                <td>22.16</td>
+                <td>14.77</td>
+                <td>9.54</td>
+                <td>12.20</td>
+            </tr>
+            <tr>
+                <td>SplaTAM [4]</td>
+                <td>12.83</td>
+                <td class="tabthird">10.10</td>
+                <td>17.72</td>
+                <td class="tabsecond">12.08</td>
+                <td class="tabfirst"><b>11.10</b></td>
+                <td class="tabsecond">7.46</td>
+                <td class="tabthird">11.88</td>
+            </tr>
+            <tr>
+                <td><b>Ours</b></td>
+                <td class="tabfirst"><b>9.86</b></td>
+                <td class="tabfirst"><b>7.80</b></td>
+                <td class="tabsecond">8.02</td>
+                <td class="tabthird">14.25</td>
+                <td class="tabsecond">13.36</td>
+                <td class="tabthird">8.71</td>
+                <td class="tabfirst"><b>10.33</b></td>
+            </tr>
+        </tbody>
+      </table>
+
+      <!-- <div class="line"></div>
+      <table>
+        <caption class="text-bold text-italic">
+            Tracking performance on ScanNet++, measured by ATE [cm]. 
+            Baseline numbers are taken from SplaTAM. For SplaTAM, results on the full dataset for scene <b>b20a261fdf</b> 
+            were computed using their released code. "-" indicates missing or unreported values.
+        </caption>
+        <thead>
+            <tr>
+                <th rowspan="2">Methods</th>
+                <th colspan="3">Scenes</th>
+                <th colspan="2">Avg.</th>
+            </tr>
+            <tr>
+                <th>8b5caf3398 (full)</th>
+                <th>b20a261fdf (360)</th>
+                <th>b20a261fdf (full)</th>
+                <th>360</th>
+                <th>full</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Point-SLAM [1]</td>
+                <td>296.7</td>
+                <td>390.8</td>
+                <td>-</td>
+                <td>343.75</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>ORB-SLAM3 [2]</td>
+                <td>156.8</td>
+                <td>159.7</td>
+                <td>-</td>
+                <td>158.25</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>SplaTAM [3]</td>
+                <td class="tabfirst"><b>0.62</b></td>
+                <td class="tabsecond">1.94</td>
+                <td class="tabsecond">16.09</td>
+                <td class="tabfirst"><b>1.28</b></td>
+                <td class="tabsecond">8.36</td>
+            </tr>
+            <tr>
+                <td><b>Ours</b></td>
+                <td class="tabsecond">1.74</td>
+                <td class="tabfirst"><b>1.38</b></td>
+                <td class="tabfirst"><b>1.46</b></td>
+                <td class="tabsecond">1.56</td>
+                <td class="tabfirst"><b>1.60</b></td>
+            </tr>
+        </tbody>
+      </table>   -->
+
+      <div class="line"></div>
+
+      <table>
+        <caption class="text-bold text-italic">Tracking time on the Replica dataset, measured in seconds.</caption>
+        <thead>
+            <tr>
+                <th>Methods</th>
+                <th>r0</th>
+                <th>r1</th>
+                <th>r2</th>
+                <th>o0</th>
+                <th>o1</th>
+                <th>o2</th>
+                <th>o3</th>
+                <th>o4</th>
+                <th>Avg.</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>SplaTAM [1]</td>
+                <td class="tabthird">2.07</td>
+                <td class="tabthird">2.03</td>
+                <td class="tabthird">1.68</td>
+                <td class="tabthird">1.87</td>
+                <td class="tabthird">1.70</td>
+                <td class="tabthird">1.36</td>
+                <td class="tabthird">2.03</td>
+                <td class="tabthird">2.29</td>
+                <td class="tabthird">1.88</td>
+            </tr>
+            <tr>
+                <td>MonoGS [2]</td>
+                <td class="tabsecond">1.27</td>
+                <td class="tabsecond">1.16</td>
+                <td class="tabsecond">1.16</td>
+                <td class="tabsecond">1.07</td>
+                <td class="tabsecond">0.83</td>
+                <td class="tabsecond">1.00</td>
+                <td class="tabsecond">1.10</td>
+                <td class="tabsecond">1.06</td>
+                <td class="tabsecond">1.08</td>
+            </tr>
+            <tr>
+                <td><b>Ours</b></td>
+                <td class="tabfirst"><b>0.54</b></td>
+                <td class="tabfirst"><b>0.48</b></td>
+                <td class="tabfirst"><b>0.52</b></td>
+                <td class="tabfirst"><b>0.43</b></td>
+                <td class="tabfirst"><b>0.42</b></td>
+                <td class="tabfirst"><b>0.49</b></td>
+                <td class="tabfirst"><b>0.54</b></td>
+                <td class="tabfirst"><b>0.46</b></td>
+                <td class="tabfirst"><b>0.48</b></td>
+            </tr>
+        </tbody>
+      </table>
+
+      <div class="line"></div>
+
+      <table>
+        <caption class="text-bold text-italic">Tracking time on the TUM dataset, measured in seconds.</caption>
+        <thead>
+            <tr>
+                <th>Methods</th>
+                <th>fr1/desk</th>
+                <th>fr1/desk2</th>
+                <th>fr1/room</th>
+                <th>fr2/xyz</th>
+                <th>fr3/office</th>
+                <th>Avg.</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>SplaTAM [1]</td>
+                <td class="tabthird">3.46</td>
+                <td class="tabthird">3.02</td>
+                <td class="tabthird">3.57</td>
+                <td class="tabthird">3.85</td>
+                <td class="tabthird">5.16</td>
+                <td class="tabthird">3.81</td>
+            </tr>
+            <tr>
+                <td>MonoGS [2]</td>
+                <td class="tabsecond">0.89</td>
+                <td class="tabsecond">0.93</td>
+                <td class="tabsecond">0.89</td>
+                <td class="tabsecond">0.59</td>
+                <td class="tabsecond">0.81</td>
+                <td class="tabsecond">0.82</td>
+            </tr>
+            <tr>
+                <td><b>Ours</b></td>
+                <td class="tabfirst"><b>0.50</b></td>
+                <td class="tabfirst"><b>0.48</b></td>
+                <td class="tabfirst"><b>0.50</b></td>
+                <td class="tabfirst"><b>0.51</b></td>
+                <td class="tabfirst"><b>0.52</b></td>
+                <td class="tabfirst"><b>0.50</b></td>
+            </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop has-text-centered">
+      <div class="line"></div>
+      <p class="title is-3 mt-5 has-text-centered"> Self-captured dataset</p>
+      <!-- <figure>
+        <img src="images/lab296_splatam.png" width="70%" alt="Failed reconstruction by SplaTAM">
+        <figcaption class="text-italic">Example of a failed reconstruction by SplaTAM on our custom dataset, showing severe distortion and misaligned geometry due to tracking failures.</figcaption>
+      </figure>
+      <div class="line"></div> -->
+
+      <table class="comparison-table no-border">
+        <caption class="text-bold text-italic">Rendering comparison on a self-captured dataset captured with an iPhone camera.</caption>
+        <thead>
+            <tr>
+                <th>SplaTAM</th>
+                <th>MonoGS</th>
+                <th>Ours</th>
+                <th>GT</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><img src="images/custom_dataset/6_splatam.png" alt="SplaTAM"></td>
+                <td><img src="images/custom_dataset/6_mono.png" alt="MonoGS"></td>
+                <td><img src="images/custom_dataset/6.png" alt="Ours"></td>
+                <td><img src="images/custom_dataset/6_gt.png" alt="GT"></td>
+            </tr>
+            <tr>
+                <td><img src="images/custom_dataset/59_splatam.png" alt="SplaTAM"></td>
+                <td><img src="images/custom_dataset/59_mono.png" alt="MonoGS"></td>
+                <td><img src="images/custom_dataset/59.png" alt="Ours"></td>
+                <td><img src="images/custom_dataset/59_gt.png" alt="GT"></td>
+            </tr>
+            <tr>
+                <td><img src="images/custom_dataset/62_splatam.png" alt="SplaTAM"></td>
+                <td><img src="images/custom_dataset/62_mono.png" alt="MonoGS"></td>
+                <td><img src="images/custom_dataset/62.png" alt="Ours"></td>
+                <td><img src="images/custom_dataset/62_gt.png" alt="GT"></td>
+            </tr>
+            <tr>
+                <td><img src="images/custom_dataset/182_splatam.png" alt="SplaTAM"></td>
+                <td><img src="images/custom_dataset/182_mono.png" alt="MonoGS"></td>
+                <td><img src="images/custom_dataset/182.png" alt="Ours"></td>
+                <td><img src="images/custom_dataset/182_gt.png" alt="GT"></td>
+            </tr>
+            <tr>
+                <td><img src="images/custom_dataset/247_splatam.png" alt="SplaTAM"></td>
+                <td><img src="images/custom_dataset/247_mono.png" alt="MonoGS"></td>
+                <td><img src="images/custom_dataset/247.png" alt="Ours"></td>
+                <td><img src="images/custom_dataset/247_gt.png" alt="GT"></td>
+            </tr>
+            <tr>
+                <td><img src="images/custom_dataset/265_splatam.png" alt="SplaTAM"></td>
+                <td><img src="images/custom_dataset/265_mono.png" alt="MonoGS"></td>
+                <td><img src="images/custom_dataset/265.png" alt="Ours"></td>
+                <td><img src="images/custom_dataset/265_gt.png" alt="GT"></td>
+            </tr>
+        </tbody>
+      </table>
+    
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop has-text-centered">
+      <p class="title is-3 mt-5 has-text-centered"> Novel view synthesis </p>
+      <table class="no-border">
+        <caption class="text-bold text-italic">
+            Novel view synthesis results with depth for scene <b>b20a261fdf</b> from the ScanNet++ dataset. 
+            The left columns display RGB images, and the right columns show the corresponding depth maps.
+        </caption>
+        <tr>
+            <td class="rotate-text">SplaTAM</td>
+            <td><img src="images/nvs/8_s2_splatam.png" alt="8_s2_splatam"></td>
+            <td><img src="images/nvs/8_s2_depth_splatam.png" alt="8_s2_depth_splatam"></td>
+            <td><img src="images/nvs/9_s2_splatam.png" alt="9_s2_splatam"></td>
+            <td><img src="images/nvs/9_s2_depth_splatam.png" alt="9_s2_depth_splatam"></td>
+            <td><img src="images/nvs/10_s2_splatam.png" alt="10_s2_splatam"></td>
+            <td><img src="images/nvs/10_s2_depth_splatam.png" alt="10_s2_depth_splatam"></td>
+            <!-- <td><img src="images/nvs/11_s2_splatam.png" alt="11_s2_splatam"></td>
+            <td><img src="images/nvs/11_s2_depth_splatam.png" alt="11_s2_depth_splatam"></td> -->
+        </tr>
+        <tr>
+            <td class="rotate-text"><b>Ours</b></td>
+            <td><img src="images/nvs/8_s2_flsl.png" alt="8_s2_flsl"></td>
+            <td><img src="images/nvs/8_s2_depth_flsl.png" alt="8_s2_depth_flsl"></td>
+            <td><img src="images/nvs/9_s2_flsl.png" alt="9_s2_flsl"></td>
+            <td><img src="images/nvs/9_s2_depth_flsl.png" alt="9_s2_depth_flsl"></td>
+            <td><img src="images/nvs/10_s2_flsl.png" alt="10_s2_flsl"></td>
+            <td><img src="images/nvs/10_s2_depth_flsl.png" alt="10_s2_depth_flsl"></td>
+            <!-- <td><img src="images/nvs/11_s2_flsl.png" alt="11_s2_flsl"></td>
+            <td><img src="images/nvs/11_s2_depth_flsl.png" alt="11_s2_depth_flsl"></td> -->
+        </tr>
+        <tr>
+            <td class="rotate-text">GT</td>
+            <td><img src="images/nvs/8_s2_gt.png" alt="8_s2_gt"></td>
+            <td><img src="images/nvs/8_s2_gt_depth.png" alt="8_s2_gt_depth"></td>
+            <td><img src="images/nvs/9_s2_gt.png" alt="9_s2_gt"></td>
+            <td><img src="images/nvs/9_s2_gt_depth.png" alt="9_s2_gt_depth"></td>
+            <td><img src="images/nvs/10_s2_gt.png" alt="10_s2_gt"></td>
+            <td><img src="images/nvs/10_s2_gt_depth.png" alt="10_s2_gt_depth"></td>
+            <!-- <td><img src="images/nvs/11_s2_gt.png" alt="11_s2_gt"></td>
+            <td><img src="images/nvs/11_s2_gt_depth.png" alt="11_s2_gt_depth"></td> -->
+        </tr>
+      </table>
+    </div>
+
+  </section>
+  
   <footer class="footer">
     <div class="content has-text-centered">
       <div class="line"></div>
